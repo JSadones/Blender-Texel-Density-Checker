@@ -38,7 +38,19 @@ class VIEW3D_PT_texel_density_checker(bpy.types.Panel):
 				row.label(text="Height:")
 				row.prop(td, "custom_height")
 				row.label(text="px")
-		
+
+			# If active image texture size show width and height
+			if td.texture_size == '5':
+				row = box.row(align=True)
+				row.label(text="Width:")
+				row.prop(td, "active_image_width")
+				row.label(text="px")
+				
+				row = row.row(align=True)
+				row.label(text="Height:")
+				row.prop(td, "active_image_height")
+				row.label(text="px")
+
 			box = layout.box()	
 			row = box.row(align=True)
 			row.label(text="Checker Method:")

@@ -95,6 +95,13 @@ def Calculate_TD_Area_To_List():
 			texture_size_cur_y = int(td.custom_height)
 		except:
 			texture_size_cur_y = 1024
+	if td.texture_size == '5':
+		for area in bpy.context.screen.areas:
+			if area.type == 'IMAGE_EDITOR':
+				texture_size_cur_x = area.spaces.active.image.size[0]
+				texture_size_cur_y = area.spaces.active.image.size[1]
+				print(str(texture_size_cur_x))
+				print(str(texture_size_cur_y))
 
 	if texture_size_cur_x < 1 or texture_size_cur_y < 1:
 		texture_size_cur_x = 1024

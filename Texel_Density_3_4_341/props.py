@@ -48,6 +48,12 @@ def Change_Texture_Size(self, context):
 		except:
 			checker_resolution_y = 1024
 			td['custom_height'] = '1024'
+	if td.texture_size == '5':
+		for area in bpy.context.screen.areas:
+			if area.type == 'IMAGE_EDITOR':
+				checker_resolution_x = area.spaces.active.image.size[0]
+				checker_resolution_y = area.spaces.active.image.size[1]
+
 
 	if checker_resolution_x < 1 or checker_resolution_y < 1:
 		checker_resolution_x = 1024
@@ -284,7 +290,8 @@ class TD_Addon_Props(bpy.types.PropertyGroup):
 				('1', '1024px', ''),
 				('2', '2048px', ''),
 				('3', '4096px', ''),
-				('4', 'Custom', ''))
+				('4', 'Custom', ''),
+				('5', 'Use image size', ''))
 	texture_size: EnumProperty(name="", items=tex_size, update=Change_Texture_Size)
 
 	selected_faces: BoolProperty(
@@ -303,6 +310,16 @@ class TD_Addon_Props(bpy.types.PropertyGroup):
 		description="Custom Height",
 		default="1024",
 		update=Change_Texture_Size)
+
+	active_image_width: StringProperty(
+		name="",
+		description="Image Width",
+		default="0")
+
+	active_image_height: StringProperty(
+		name="",
+		description="Image Height",
+		default="0")
 
 	units_list = (('0', 'px/cm', ''),
 				  ('1', 'px/m', ''),
