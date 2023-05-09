@@ -1,10 +1,10 @@
 bl_info = {
-	"name": "Texel Density Checker",
+	"name": "Texel Density Checker TF",
 	"description": "Tools for for checking Texel Density and wasting of uv space",
 	"author": "Ivan 'mrven' Vostrikov, Toomas Laik",
 	"wiki_url": "https://gumroad.com/l/CEIOR",
 	"tracker_url": "https://blenderartists.org/t/texel-density-checker-3-0-update-09-04-20/685566",
-	"version": (3, 4),
+	"version": (4, 0),
 	"blender": (3, 4, 1),
 	"location": "3D View > Toolbox",
 	"category": "Object",

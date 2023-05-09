@@ -93,14 +93,14 @@ class TD_Addon_Preferences(bpy.types.AddonPreferences):
 	view3d_panel_category: StringProperty(
 		name="",
 		description="Choose a name for the category of panel (3D View)",
-		default="Texel Density",
+		default="Texel Density TF",
 		update=update_view3d_panel_category
 		)
 
 	uv_panel_category: StringProperty(
 		name="",
 		description="Choose a name for the category of panel (UV Editor)",
-		default="Texel Density",
+		default="Texel Density TF",
 		update=update_uv_panel_category
 		)
 

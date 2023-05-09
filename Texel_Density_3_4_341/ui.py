@@ -1,5 +1,10 @@
 import bpy
 
+def get_addon_version():
+    from . import __name__ as addon_name  # import the addon name from __init__.py
+    addon_module = __import__(addon_name)  # import the addon module
+    version = addon_module.bl_info.get("version")
+    return version
 
 # Panel in 3D View
 class VIEW3D_PT_texel_density_checker(bpy.types.Panel):
@@ -17,8 +22,9 @@ class VIEW3D_PT_texel_density_checker(bpy.types.Panel):
 		
 		if context.active_object.type == 'MESH' and len(context.active_object.data.uv_layers) > 0:
 			layout = self.layout
-
+			
 			row = layout.row(align=True)
+			row.label(text = "Version: " + str(get_addon_version()))
 			row.label(text="Units:")
 			row.prop(td, 'units', expand=False)
 			
@@ -27,20 +33,8 @@ class VIEW3D_PT_texel_density_checker(bpy.types.Panel):
 			row.label(text="Texture Size:")
 			row.prop(td, 'texture_size', expand=False)
 
-			# If custom texture size show fields for width and height
-			if td.texture_size == '4':
-				row = box.row(align=True)
-				row.label(text="Width:")
-				row.prop(td, "custom_width")
-				row.label(text="px")
-
-				row = box.row(align=True)
-				row.label(text="Height:")
-				row.prop(td, "custom_height")
-				row.label(text="px")
-
 			# If active image texture size show width and height
-			if td.texture_size == '5':
+			if td.texture_size == '0':
 				row = box.row(align=True)
 				row.label(text="Width:")
 				row.prop(td, "active_image_width")

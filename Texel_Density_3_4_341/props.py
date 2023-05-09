@@ -25,30 +25,6 @@ def Change_Texture_Size(self, context):
 
 	# Get texture size from panel
 	if td.texture_size == '0':
-		checker_resolution_x = 512
-		checker_resolution_y = 512
-	if td.texture_size == '1':
-		checker_resolution_x = 1024
-		checker_resolution_y = 1024
-	if td.texture_size == '2':
-		checker_resolution_x = 2048
-		checker_resolution_y = 2048
-	if td.texture_size == '3':
-		checker_resolution_x = 4096
-		checker_resolution_y = 4096
-	if td.texture_size == '4':
-		try:
-			checker_resolution_x = int(td.custom_width)
-		except:
-			checker_resolution_x = 1024
-			td['custom_width'] = '1024'
-
-		try:
-			checker_resolution_y = int(td.custom_height)
-		except:
-			checker_resolution_y = 1024
-			td['custom_height'] = '1024'
-	if td.texture_size == '5':
 		for area in bpy.context.screen.areas:
 			if area.type == 'IMAGE_EDITOR':
 				checker_resolution_x = area.spaces.active.image.size[0]
@@ -286,12 +262,8 @@ class TD_Addon_Props(bpy.types.PropertyGroup):
 		default="1.28",
 		update=Filter_Density_Set)
 
-	tex_size = (('0', '512px', ''),
-				('1', '1024px', ''),
-				('2', '2048px', ''),
-				('3', '4096px', ''),
-				('4', 'Custom', ''),
-				('5', 'Use image size', ''))
+	tex_size = (('0', 'Use image size', ''),
+				)
 	texture_size: EnumProperty(name="", items=tex_size, update=Change_Texture_Size)
 
 	selected_faces: BoolProperty(

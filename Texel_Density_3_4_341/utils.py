@@ -58,6 +58,12 @@ def Sync_UV_Selection():
 
 	bmesh.update_edit_mesh(mesh)
 
+def ShowMessageBox(message = "", title = "Message Box", icon = 'INFO'):
+    def draw(self, context):
+        self.layout.label(text=message)
+
+    bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
+
 # Get List of TD and UV area for each selected polygon
 def Calculate_TD_Area_To_List():
 	td = bpy.context.scene.td
@@ -75,33 +81,15 @@ def Calculate_TD_Area_To_List():
 	
 	# Get texture size from panel
 	if td.texture_size == '0':
-		texture_size_cur_x = 512
-		texture_size_cur_y = 512
-	if td.texture_size == '1':
-		texture_size_cur_x = 1024
-		texture_size_cur_y = 1024
-	if td.texture_size == '2':
-		texture_size_cur_x = 2048
-		texture_size_cur_y = 2048
-	if td.texture_size == '3':
-		texture_size_cur_x = 4096
-		texture_size_cur_y = 4096
-	if td.texture_size == '4':
-		try:
-			texture_size_cur_x = int(td.custom_width)
-		except:
-			texture_size_cur_x = 1024
-		try:
-			texture_size_cur_y = int(td.custom_height)
-		except:
-			texture_size_cur_y = 1024
-	if td.texture_size == '5':
 		for area in bpy.context.screen.areas:
 			if area.type == 'IMAGE_EDITOR':
-				texture_size_cur_x = area.spaces.active.image.size[0]
-				texture_size_cur_y = area.spaces.active.image.size[1]
-				print(str(texture_size_cur_x))
-				print(str(texture_size_cur_y))
+				try:
+					texture_size_cur_x = area.spaces.active.image.size[0]
+					texture_size_cur_y = area.spaces.active.image.size[1]
+					print(str(texture_size_cur_x))
+					print(str(texture_size_cur_y))
+				except:
+					ShowMessageBox("No image has been found in the IMAGE_EDITOR. This may cause issues.","Error", "ERROR")
 
 	if texture_size_cur_x < 1 or texture_size_cur_y < 1:
 		texture_size_cur_x = 1024
